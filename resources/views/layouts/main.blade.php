@@ -159,7 +159,7 @@
     <a href="index3.html" class="brand-link">
       <img src="{{ asset('dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
-      <span class="brand-text font-weight-light">AdminLTE 3</span>
+      <span class="brand-text font-weight-light">Drone Management</span>
     </a>
 
     <!-- Sidebar -->
@@ -189,26 +189,26 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./index.html" class="nav-link active">
+                <a href="{{route('drone.index')}}" class="nav-link active">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v1</p>
+                  <p>Drones</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="./index2.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v2</p>
+                  <p>Drone flight plan</p>
                 </a>
-              </li>
-              <li class="nav-item">
+              </li> 
+              <!--<li class="nav-item">
                 <a href="./index3.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Dashboard v3</p>
                 </a>
-              </li>
+              </li> -->
             </ul>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a href="pages/widgets.html" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
@@ -683,9 +683,9 @@
               <i class="fas fa-circle nav-icon"></i>
               <p>Level 1</p>
             </a>
-          </li>
+          </li> -->
           <li class="nav-header">LABELS</li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon far fa-circle text-danger"></i>
               <p class="text">Important</p>
@@ -696,12 +696,19 @@
               <i class="nav-icon far fa-circle text-warning"></i>
               <p>Warning</p>
             </a>
-          </li>
+          </li> -->
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a class="nav-link" href="{{ route('logout') }}"
+              onclick="event.preventDefault();document.getElementById('logout-form').submit();"> <i class="nav-icon far fa-circle text-info"></i>
+                {{ __('Logout') }}
+            </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+              @csrf
+            </form>
+            <!-- <a href="#" class="nav-link">
               <i class="nav-icon far fa-circle text-info"></i>
               <p>Informational</p>
-            </a>
+            </a> -->
           </li>
         </ul>
       </nav>
