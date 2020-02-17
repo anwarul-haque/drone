@@ -41,7 +41,9 @@ class DroneController extends Controller
     {
         //
         $request->merge(['user_id' => Auth::user()->id]);
-        Drone::create($request->all());
+
+        $drone = Drone::create($request->all());
+
         return redirect()->route('drone.index');
     }
 

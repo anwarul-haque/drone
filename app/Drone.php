@@ -2,11 +2,13 @@
 
 namespace App;
 
+use App\Image;
 use Illuminate\Database\Eloquent\Model;
 
 class Drone extends Model
 {
     //
+    protected $guarded = [];
     protected $fillable = [
         'name',
         'model_no',
@@ -23,4 +25,9 @@ class Drone extends Model
      * @var array
      */
     protected $table = 'drones';
+
+    public function image()
+    {
+        return $this->morphOne(Image::class,'imageable');
+    }
 }
