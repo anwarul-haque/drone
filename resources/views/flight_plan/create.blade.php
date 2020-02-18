@@ -29,16 +29,14 @@
             <!-- jquery validation -->
             <div class="card card-primary">
               <div class="card-header">
-                <h1 class="card-title">Edit Profile</h1>
+                <h3 class="card-title">Drone Flight Plane</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
               <!-- <form role="form" id="register_drone" novalidate="novalidate"> -->
-              <form method="post" action="{{ route('home.update',Auth::user()->id) }}" enctype="multipart/form-data" accept-charset="UTF-8">
+              <form method="post" action="{{ route('flightPlan.store') }}" accept-charset="UTF-8">
                 <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
-                <div class="card-body">
-                    @include('user._form')
-                </div>
+                    @include('flight_plan._form')
               </form>
             </div>
             <!-- /.card -->

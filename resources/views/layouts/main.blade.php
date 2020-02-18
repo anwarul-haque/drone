@@ -167,10 +167,13 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="{{ asset('dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
+          @php
+              $user = App\User::with('image')->find(Auth::user()->id);
+          @endphp
+          <img src="{{$user->image? asset('storage/'.$user->image->url):'//placehold.it/100'}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="{{route('home.show',Auth::user()->id)}}" class="d-block">Alexander Pierce</a>
+          <a href="{{route('home.show',Auth::user()->id)}}" class="d-block">{{Auth::user()->name}}</a>
         </div>
       </div>
 
@@ -195,17 +198,17 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
+                <a href="{{route('flightPlan.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Drone flight plan</p>
                 </a>
               </li> 
-              <!--<li class="nav-item">
-                <a href="./index3.html" class="nav-link">
+              <li class="nav-item">
+                <a href="{{route('pilot.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v3</p>
+                  <p>Pilot</p>
                 </a>
-              </li> -->
+              </li> 
             </ul>
           </li>
           <!-- <li class="nav-item">
