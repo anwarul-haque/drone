@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Pilot;
 use Illuminate\Http\Request;
 use App\Drone;
-
+Use App\User;
+use Auth;
 class PilotController extends Controller
 {
     /**
@@ -16,9 +17,11 @@ class PilotController extends Controller
     public function index()
     {
         //
-        $drones  = Drone::paginate(5);
-
-        return view('pilot.index')->with('drones',$drones);
+   
+        $pilots = Pilot::select('pilot_id')->where('operator_id',Auth::user()->id)->get()->toArray();
+       
+        $pilots = User::where('role',2)->whereIn('id',$pilots)->paginate(5);
+        return view('pilot.index')->with('pilots',$pilots);
     }
 
     /**
@@ -29,7 +32,9 @@ class PilotController extends Controller
     public function create()
     {
         //
-        return view('pilot.create');
+        $pilots = User::where('role',2)->get();
+        
+        return view('pilot.create')->with('pilots',$pilots);
     }
 
     /**
@@ -41,10 +46,8 @@ class PilotController extends Controller
     public function store(Request $request)
     {
         //
-        $request->merge(['user_id' => Auth::user()->id]);
-
-        $drone = Drone::create($request->all());
-
+        $request->merge(['operator_id' => Auth::user()->id]);
+        Pilot::create($request->all());
         return redirect()->route('pilot.index');
     }
 
@@ -98,8 +101,7 @@ class PilotController extends Controller
     public function destroy(Pilot $pilot)
     {
         //
-        Drone::destroy($id);
-
+        Pilot::destroy($id);
         return redirect()->route('pilot.index');
     }
 }

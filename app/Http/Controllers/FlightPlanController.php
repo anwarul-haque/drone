@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\FlightPlan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Drone;
+use App\Pilot;
+use App\User;
 use Auth;
 
 class FlightPlanController extends Controller
@@ -17,7 +20,7 @@ class FlightPlanController extends Controller
     public function index()
     {
         //
-        $flightPlans  = FlightPlan::paginate(5);
+        $flightPlans  = FlightPlan::where('user_id',Auth::user()->id)->paginate(5);
 
         return view('flight_plan.index')->with('flightPlans',$flightPlans);
     }
@@ -30,7 +33,13 @@ class FlightPlanController extends Controller
     public function create()
     {
         //
-        return view('flight_plan.create');
+        
+        $pilots_id = Pilot::where('operator_id',Auth::user()->id)->get()->pluck('id')->toArray();
+        
+        $pilots = User::where('role',2)->whereIn('id',$pilots_id)->get();
+        $drones = Drone::where('user_id',Auth::user()->id)->get();
+       
+        return view('flight_plan.create',compact('pilots','drones'));
     }
 
     /**
@@ -41,7 +50,27 @@ class FlightPlanController extends Controller
      */
     public function store(Request $request)
     {
-       
+        
+        $request->validate([
+            'address' => 'required',
+            'zip_code' => 'required',
+            'start_time' => 'required',
+            'end_time' => 'required',
+            'height' => 'required',
+            'purpose' => 'required',
+            // 'pilot_id' => 'required',
+            'drone_id' => 'required',
+        ]);
+        if(Auth::user()->role == 1)
+        {
+            $request->validate([
+                'pilot_id' => 'required',
+            ]);
+        }
+        if(Auth::user()->role == 2){
+            $request->merge(['pilot_id' => Auth::user()->id]);
+        }
+
         $request->merge(['user_id' => Auth::user()->id]);
         FlightPlan::create($request->all());
 

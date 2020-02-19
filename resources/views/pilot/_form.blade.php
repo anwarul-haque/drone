@@ -8,12 +8,13 @@
         <input type="text" name="model_no" class="form-control" id="model_no" placeholder="Model number">
     </div>
     <div class="form-group">
-        <label>Size</label>
+        <label>Select Pilots</label>
         <select name="size" class="form-control select2" style="width: 100%;">
-            <option selected="selected">Select Size</option>
-            <option value='1'>Nano V </option>
-            <option value="2">Micro</option>
-            <option value="3">Small</option>
+            <option selected="selected">Select Pilots</option>
+            @foreach ($pilots as $pilot)
+            <option value= {{$pilot->id}}>{{$pilot->name}} </option>
+            @endforeach
+           
         </select>
     </div>
     <div class="form-group">

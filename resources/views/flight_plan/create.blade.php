@@ -8,7 +8,7 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0 text-dark">Drone</h1>
+              <h1 class="m-0 text-dark">Flight Plan</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
@@ -29,7 +29,7 @@
             <!-- jquery validation -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Drone Flight Plane</h3>
+                <h3 class="card-title">Drone Flight Plan</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->

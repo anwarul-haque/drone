@@ -45,6 +45,7 @@
                   <tr>
                     <th scope="col">Address</th>
                     <th scope="col">Zip code</th>
+                    <th scope="col">Pilot Name</th>
                     <th scope="col">Start Time</th>
                     <th scope="col">End Time</th>
                     <th scope="col">Height</th>
@@ -54,16 +55,19 @@
                   </tr>
                 </thead>
                 <tbody>
-                  {{-- {{dd($drones)}} --}}
+                  
                   @foreach ($flightPlans as $flightPlan)
                   <tr>
                     <td>{{$flightPlan->address}}</td>
                     <td>{{$flightPlan->zip_code}}</td>
                     <td>
-                      
-                      {{$flightPlan->start_time}}
                      
+                      @php
+                          $userPilot = App\User::find($flightPlan->pilot_id);
+                      @endphp
+                      {{ $userPilot->name}}
                     </td>
+                    <td>{{$flightPlan->start_time}}</td>
                     <td>
                       {{$flightPlan->end_time}}
                     </td>

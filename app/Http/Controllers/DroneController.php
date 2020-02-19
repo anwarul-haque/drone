@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Drone;
 use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class DroneController extends Controller
 {
@@ -16,7 +17,8 @@ class DroneController extends Controller
     public function index()
     {
         //
-        $drones  = Drone::paginate(5);
+        // dd(Auth::user()->id);
+        $drones  = Drone::where('user_id',Auth::user()->id)->paginate(5);
 
         return view('drone.index')->with('drones',$drones);
     }
@@ -40,6 +42,15 @@ class DroneController extends Controller
     public function store(Request $request)
     {
         //
+       
+        $request->validate([
+            'name' => 'required',
+            'model_no' => 'required',
+            'size' => 'required',
+            'type' => 'required',
+            'is_npnt' => 'required',
+        ]);
+
         $request->merge(['user_id' => Auth::user()->id]);
 
         $drone = Drone::create($request->all());

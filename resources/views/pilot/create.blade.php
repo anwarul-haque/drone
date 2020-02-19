@@ -36,7 +36,21 @@
               <!-- <form role="form" id="register_drone" novalidate="novalidate"> -->
               <form method="post" action="{{ route('pilot.store') }}" accept-charset="UTF-8">
                 <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
-                    @include('drone._form')
+                <div class="card-body">
+                  <div class="form-group">
+                    <label>Select Pilots</label>
+                    <select name="pilot_id" class="form-control select2" style="width: 100%;">
+                        <option selected="selected">Select Pilots</option>
+                        @foreach ($pilots as $pilot)
+                        <option value= {{$pilot->id}}>{{$pilot->name}} </option>
+                        @endforeach
+                      
+                    </select>
+                  </div>
+                </div>
+              <div class="card-footer">
+                <button type="submit" class="btn btn-primary pull-right">Submit</button>
+            </div>
               </form>
             </div>
             <!-- /.card -->

@@ -29,6 +29,29 @@
             <option value="6">Other</option>
         </select>
     </div>
+    @if (Auth::user()->role == 1)
+        <div class="form-group">
+            <label>Select Pilots</label>
+            <select name="pilot_id" class="form-control select2" style="width: 100%;">
+                <option selected="selected">Select Pilots</option>
+                @foreach ($pilots as $pilot)
+                    <option value= {{$pilot->id}}>{{$pilot->name}} </option>
+                @endforeach
+            
+            </select>
+        </div>
+    @endif
+
+    <div class="form-group">
+        <label>Select Drone</label>
+        <select name="drone_id" class="form-control select2" style="width: 100%;">
+            <option selected="selected">Select Drone</option>
+            @foreach ($drones as $drone)
+                <option value= {{$drone->id}}>{{$drone->name}} </option>
+            @endforeach
+           
+        </select>
+    </div>
 </div>
 
 <!-- /.card-body -->

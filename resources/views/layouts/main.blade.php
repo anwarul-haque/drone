@@ -32,6 +32,7 @@
 
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+   
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
@@ -44,7 +45,15 @@
         <a href="#" class="nav-link">Contact</a>
       </li>
     </ul>
-
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+  @endif
     <!-- SEARCH FORM -->
     <form class="form-inline ml-3">
       <div class="input-group input-group-sm">
@@ -57,6 +66,7 @@
       </div>
     </form>
 
+    
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <!-- Messages Dropdown Menu -->
@@ -203,12 +213,15 @@
                   <p>Drone flight plan</p>
                 </a>
               </li> 
+              @if (Auth::user()->role == 1)
               <li class="nav-item">
                 <a href="{{route('pilot.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Pilot</p>
                 </a>
               </li> 
+              @endif
+             
             </ul>
           </li>
           <!-- <li class="nav-item">

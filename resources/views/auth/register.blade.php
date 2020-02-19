@@ -40,12 +40,12 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="type" class="col-md-4 col-form-label text-md-right">{{ __('Type') }}</label>
+                            <label for="type" class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label>
 
                             <div class="col-md-6">
-                                <input type="radio" id="operator" name="type" value="operator">
+                                <input type="radio" id="operator" name="role" value="1">
                                 <label for="operator">Operator</label><br>
-                                <input type="radio" id="pilot" name="type" value="pilot">
+                                <input type="radio" id="pilot" name="role" value="2">
                                 <label for="pilot">Polot</label><br>
                             </div>
                         </div>
