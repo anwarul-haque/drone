@@ -18,3 +18,12 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/home/{id}', 'HomeController@show')->name('home.show');
+
+Route::post('/home/{id}', 'HomeController@update')->name('home.update');
+
+Route::resource('drone', 'DroneController');
+Route::resource('flightPlan', 'FlightPlanController');
+
+Route::resource('pilot', 'PilotController');
