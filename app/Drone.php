@@ -4,10 +4,13 @@ namespace App;
 
 use App\Image;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Drone extends Model
 {
     //
+    use SoftDeletes;
+    protected $dates = ['deleted_at'];
     protected $guarded = [];
     protected $fillable = [
         'name',

@@ -4,7 +4,9 @@
     color: brown;
   }
 </style>
+
 @section('content')
+
 <div class="row">
   <div class="col-12">
     <div class="card">
@@ -26,6 +28,7 @@
     </div>
   </div>
 </div>
+
     <!-- /.content-header -->
 
     <!-- Main content -->
@@ -36,7 +39,7 @@
             <div class="card-header"> 
               <!-- <h3 class="card-title">DataTable with minimal features &amp; hover style</h3> -->
               <!-- Button trigger modal -->
-               <a href="{{route('drone.create')}}" class="btn btn-info pull-left">Add Drone</a>
+               <!-- <a href="{{route('drone.create')}}" class="btn btn-info pull-left">Add Drone</a> -->
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -53,14 +56,15 @@
                   </tr>
                 </thead>
                 <tbody>
-                  {{-- {{dd($drones)}} --}}
+               
                   @foreach ($drones as $drone)
+
                   <tr>
                     <td>{{$drone->name}}</td>
                     <td>{{$drone->model_no}}</td>
                     <td>
                       
-                     
+                      
                     </td>
                     <td>
                       @if ($drone->size == 1)

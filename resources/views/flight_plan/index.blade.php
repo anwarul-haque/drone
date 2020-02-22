@@ -12,12 +12,12 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0 text-dark">Drone</h1>
+              <h1 class="m-0 text-dark">Flight Plan</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Drone</li>
+                <li class="breadcrumb-item active">Flight Plan</li>
               </ol>
             </div><!-- /.col -->
           </div><!-- /.row -->
@@ -36,62 +36,73 @@
             <div class="card-header"> 
               <!-- <h3 class="card-title">DataTable with minimal features &amp; hover style</h3> -->
               <!-- Button trigger modal -->
-               <a href="{{route('drone.create')}}" class="btn btn-info pull-left">Add Drone</a>
+               <a href="{{route('flightPlan.create')}}" class="btn btn-info pull-left">Add Flight Plan</a>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
               <table class="table table-hover">
                 <thead>
                   <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Model Number</th>
-                    <th scope="col">NPNT Complient</th>
-                    <th scope="col">Size</th>
-                    <th scope="col">Type</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Zip code</th>
+                    <th scope="col">Pilot Name</th>
+                    <th scope="col">Start Time</th>
+                    <th scope="col">End Time</th>
+                    <th scope="col">Height</th>
+                    <th scope="col">Purpose</th>
                    
                     <th class="text-right" scope="col">Option</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {{-- {{dd($drones)}} --}}
-                  @foreach ($drones as $drone)
+                  
+                  @foreach ($flightPlans as $flightPlan)
                   <tr>
-                    <td>{{$drone->name}}</td>
-                    <td>{{$drone->model_no}}</td>
+                    <td>{{$flightPlan->address}}</td>
+                    <td>{{$flightPlan->zip_code}}</td>
+                    <td>
+                     
+                      @php
+                          $userPilot = App\User::find($flightPlan->pilot_id);
+                      @endphp
+                      {{ $userPilot->name}}
+                    </td>
+                    <td>{{$flightPlan->start_time}}</td>
+                    <td>
+                      {{$flightPlan->end_time}}
+                    </td>
+                    <td>
+                      {{$flightPlan->height}}
+                    </td>
                     <td>
                       
-                     
-                    </td>
-                    <td>
-                      @if ($drone->size == 1)
-                        Nano V
+                      @if ($flightPlan->purpose == 1)
+                        Photography
                       @endif
-                      @if($drone->size == 2)
-                          Micro
+                      @if ($flightPlan->purpose == 2)
+                      Surveying
                       @endif
-                      @if($drone->size == 3)
-                        Small
+                      @if ($flightPlan->purpose == 3)
+                      Inspection
                       @endif
-                        
-                    </td>
-                    <td>
-                      @if ($drone->type == 1)
-                        Multiroter V
+                      @if ($flightPlan->purpose == 4)
+                      Security Surveillance
                       @endif
-                      @if($drone->type == 2)
-                        Flying Wing
+                      @if ($flightPlan->purpose == 5)
+                      Crowd Monitoring
                       @endif
-                      @if($drone->type == 3)
-                        VTOL-Hybrid
+                      @if ($flightPlan->purpose == 5)
+                      Other
                       @endif
+                         
                     </td>
                    
                     <td class="text-right">
                       <div class="btn-group">
-                        <a href="{{ route('drone.edit',$drone->id) }}" class="btn"><i class="fas fa-edit btn-option-con"></i></a>
+                        <a href="{{ route('flightPlan.edit',$flightPlan->id) }}" class="btn"><i class="fas fa-edit btn-option-con"></i></a>
                   
                         
-                        <form action="{{ route('drone.update',$drone->id) }}" method="POST">
+                        <form action="{{ route('flightPlan.destroy',$flightPlan->id) }}" method="POST">
                           {{ csrf_field() }}
                           {{ method_field('DELETE') }}
                           
@@ -113,7 +124,7 @@
                     <td></td>
                     <td></td>
                     <td class="text-right">
-                      {{ $drones->links() }}
+                      {{ $flightPlans->links() }}
                     </td>
                   </tr>
                </tfoot>
@@ -128,4 +139,4 @@
       </div>
       <!-- /.row -->
     </section>
-@endsection
+@endsection 

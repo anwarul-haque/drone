@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Drone;
-use Auth;
+use App\Pilot;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-
-class DroneController extends Controller
+use App\Drone;
+Use App\User;
+use Auth;
+class PilotController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,10 +17,11 @@ class DroneController extends Controller
     public function index()
     {
         //
-        // dd(Auth::user()->id);
-        $drones  = Drone::where('user_id',Auth::user()->id)->paginate(5);
-
-        return view('drone.index')->with('drones',$drones);
+   
+        $pilots = Pilot::select('pilot_id')->where('operator_id',Auth::user()->id)->get()->toArray();
+       
+        $pilots = User::where('role',2)->whereIn('id',$pilots)->paginate(5);
+        return view('pilot.index')->with('pilots',$pilots);
     }
 
     /**
@@ -30,7 +31,10 @@ class DroneController extends Controller
      */
     public function create()
     {
-        return view('drone.create');
+        //
+        $pilots = User::where('role',2)->get();
+        
+        return view('pilot.create')->with('pilots',$pilots);
     }
 
     /**
@@ -42,29 +46,18 @@ class DroneController extends Controller
     public function store(Request $request)
     {
         //
-       
-        $request->validate([
-            'name' => 'required',
-            'model_no' => 'required',
-            'size' => 'required',
-            'type' => 'required',
-            'is_npnt' => 'required',
-        ]);
-
-        $request->merge(['user_id' => Auth::user()->id]);
-
-        $drone = Drone::create($request->all());
-
-        return redirect()->route('drone.index');
+        $request->merge(['operator_id' => Auth::user()->id]);
+        Pilot::create($request->all());
+        return redirect()->route('pilot.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Drone  $drone
+     * @param  \App\Pilot  $pilot
      * @return \Illuminate\Http\Response
      */
-    public function show(Drone $drone)
+    public function show(Pilot $pilot)
     {
         //
     }
@@ -72,43 +65,43 @@ class DroneController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Drone  $drone
+     * @param  \App\Pilot  $pilot
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Pilot $pilot)
     {
         //
-        // dd($id);
         $drone = Drone::find($id);
-        return view('drone.edit')->with('drone',$drone);
+        return view('pilot.edit')->with('drone',$drone);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Drone  $drone
+     * @param  \App\Pilot  $pilot
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Pilot $pilot)
     {
+        //
         $drone = Drone::find($id);
       
         $drone->fill($request->all())->save();
 
-        return redirect()->route('drone.index');
+        return redirect()->route('pilot.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Drone  $drone
+     * @param  \App\Pilot  $pilot
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Pilot $pilot)
     {
-         Drone::destroy($id);
-
-        return redirect()->route('drone.index');
+        //
+        Pilot::destroy($id);
+        return redirect()->route('pilot.index');
     }
 }

@@ -12,12 +12,12 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0 text-dark">Drone</h1>
+              <h1 class="m-0 text-dark">Registered Pilots</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Drone</li>
+                <li class="breadcrumb-item active">Registered Pilots</li>
               </ol>
             </div><!-- /.col -->
           </div><!-- /.row -->
@@ -36,7 +36,7 @@
             <div class="card-header"> 
               <!-- <h3 class="card-title">DataTable with minimal features &amp; hover style</h3> -->
               <!-- Button trigger modal -->
-               <a href="{{route('drone.create')}}" class="btn btn-info pull-left">Add Drone</a>
+               <!-- <a href="{{route('pilot.create')}}" class="btn btn-info pull-left">Add Pilot</a> -->
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -44,54 +44,23 @@
                 <thead>
                   <tr>
                     <th scope="col">Name</th>
-                    <th scope="col">Model Number</th>
-                    <th scope="col">NPNT Complient</th>
-                    <th scope="col">Size</th>
-                    <th scope="col">Type</th>
-                   
+                    <th scope="col">Address</th>
                     <th class="text-right" scope="col">Option</th>
                   </tr>
                 </thead>
                 <tbody>
                   {{-- {{dd($drones)}} --}}
-                  @foreach ($drones as $drone)
+                  @foreach ($pilots as $pilot)
                   <tr>
-                    <td>{{$drone->name}}</td>
-                    <td>{{$drone->model_no}}</td>
-                    <td>
-                      
-                     
-                    </td>
-                    <td>
-                      @if ($drone->size == 1)
-                        Nano V
-                      @endif
-                      @if($drone->size == 2)
-                          Micro
-                      @endif
-                      @if($drone->size == 3)
-                        Small
-                      @endif
-                        
-                    </td>
-                    <td>
-                      @if ($drone->type == 1)
-                        Multiroter V
-                      @endif
-                      @if($drone->type == 2)
-                        Flying Wing
-                      @endif
-                      @if($drone->type == 3)
-                        VTOL-Hybrid
-                      @endif
-                    </td>
+                    <td>{{$pilot->name}}</td>
+                    <td>{{$pilot->address}}</td>
                    
                     <td class="text-right">
                       <div class="btn-group">
-                        <a href="{{ route('drone.edit',$drone->id) }}" class="btn"><i class="fas fa-edit btn-option-con"></i></a>
+                        {{-- <a href="{{ route('pilot.edit',$pilot->id) }}" class="btn"><i class="fas fa-edit btn-option-con"></i></a> --}}
                   
                         
-                        <form action="{{ route('drone.update',$drone->id) }}" method="POST">
+                        <form action="{{ route('pilot.update',$pilot->id) }}" method="POST">
                           {{ csrf_field() }}
                           {{ method_field('DELETE') }}
                           
@@ -107,13 +76,10 @@
                 </tbody>
                 <tfoot>
                   <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                  
                     <td></td>
                     <td class="text-right">
-                      {{ $drones->links() }}
+                      {{ $pilots->links() }}
                     </td>
                   </tr>
                </tfoot>

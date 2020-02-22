@@ -8,12 +8,12 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0 text-dark">Drone</h1>
+              <h1 class="m-0 text-dark">Flight Plan</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">{{$user->name}}</li>
+                <li class="breadcrumb-item active">Create</li>
               </ol>
             </div><!-- /.col -->
           </div><!-- /.row -->
@@ -28,15 +28,15 @@
           <div class="col-md-12">
             <!-- jquery validation -->
             <div class="card card-primary">
-              
+              <div class="card-header">
+                <h3 class="card-title">Drone Flight Plan</h3>
+              </div>
               <!-- /.card-header -->
               <!-- form start -->
               <!-- <form role="form" id="register_drone" novalidate="novalidate"> -->
-              <form method="post" action="{{ route('home.update',Auth::user()->id) }}" enctype="multipart/form-data" accept-charset="UTF-8">
+              <form method="post" action="{{ route('flightPlan.store') }}" accept-charset="UTF-8">
                 <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
-                <div class="card-body">
-                    @include('user._form')
-                </div>
+                    @include('flight_plan._form')
               </form>
             </div>
             <!-- /.card -->
