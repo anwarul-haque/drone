@@ -33,4 +33,12 @@ class Drone extends Model
     {
         return $this->morphOne(Image::class,'imageable');
     }
+
+    /**
+     * Get the post that owns the comment.
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

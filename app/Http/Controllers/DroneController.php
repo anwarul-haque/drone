@@ -17,7 +17,7 @@ class DroneController extends Controller
     public function index()
     {
         //
-        // dd(Auth::user()->id);
+        
         $drones  = Drone::where('user_id',Auth::user()->id)->paginate(5);
 
         return view('drone.index')->with('drones',$drones);

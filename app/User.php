@@ -45,4 +45,21 @@ class User extends Authenticatable
     {
         return $this->morphOne(Image::class,'imageable')->orderBy('created_at', 'desc');
     }
+
+    /**
+     * Get the drone for the user post.
+     */
+    public function drones()
+    {
+        return $this->hasMany('App\Drone');
+    }
+
+    /**
+     * Get the flight_Plans for the user post.
+     */
+    public function flight_plans()
+    {
+        return $this->hasMany('App\FlightPlan');
+    }
+
 }
