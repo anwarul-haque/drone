@@ -35,3 +35,6 @@ Route::get('/admin/operator', 'AdminController@operator')->name('admin.operator'
 
 Route::get('/hello/{id}','HomeController@hello')->name('hello');
 
+Route::get('/getName',function(){
+    return config('app.name');
+});
