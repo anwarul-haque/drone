@@ -248,10 +248,7 @@
                 </a>
               </li> 
               @endif
-
-            @endif
-                
-             
+            @endif             
             </ul>
           </li>
           <!-- <li class="nav-item">
