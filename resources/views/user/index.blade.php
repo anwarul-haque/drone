@@ -13,7 +13,7 @@
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Create</li>
+                <li class="breadcrumb-item active">{{$user->name}}</li>
               </ol>
             </div><!-- /.col -->
           </div><!-- /.row -->
@@ -28,9 +28,7 @@
           <div class="col-md-12">
             <!-- jquery validation -->
             <div class="card card-primary">
-              <div class="card-header">
-                <h1 class="card-title">Edit Profile</h1>
-              </div>
+              
               <!-- /.card-header -->
               <!-- form start -->
               <!-- <form role="form" id="register_drone" novalidate="novalidate"> -->

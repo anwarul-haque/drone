@@ -46,7 +46,7 @@
                                 <input type="radio" id="operator" name="role" value="1">
                                 <label for="operator">Operator</label><br>
                                 <input type="radio" id="pilot" name="role" value="2">
-                                <label for="pilot">Polot</label><br>
+                                <label for="pilot">Pilot</label><br>
                             </div>
                         </div>
 

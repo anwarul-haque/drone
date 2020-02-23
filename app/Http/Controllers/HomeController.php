@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\User;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -25,7 +26,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $user = Auth::user();
+        return view('home')->with('user',$user);
     }
  
     public function show($id)
@@ -60,6 +62,11 @@ class HomeController extends Controller
         }
         $user->save();
         return back();
+    }
+
+    public function hello($id){
+        $user = User::with('image')->find($id);
+        return view('user.index')->with('user',$user);
     }
 
 }

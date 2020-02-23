@@ -12,12 +12,12 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0 text-dark">My Pilots</h1>
+              <h1 class="m-0 text-dark">Registered Operators</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Pilots</li>
+                <li class="breadcrumb-item active">Registered Operators</li>
               </ol>
             </div><!-- /.col -->
           </div><!-- /.row -->
@@ -36,7 +36,7 @@
             <div class="card-header"> 
               <!-- <h3 class="card-title">DataTable with minimal features &amp; hover style</h3> -->
               <!-- Button trigger modal -->
-               <a href="{{route('pilot.create')}}" class="btn btn-info pull-left">Add Pilot</a>
+               <!-- <a href="{{route('pilot.create')}}" class="btn btn-info pull-left">Add Pilot</a> -->
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -50,7 +50,7 @@
                 </thead>
                 <tbody>
                   {{-- {{dd($drones)}} --}}
-                  @foreach ($pilots as $pilot)
+                  @foreach ($operators as $pilot)
                   <tr>
                     <td>{{$pilot->name}}</td>
                     <td>{{$pilot->address}}</td>
@@ -79,7 +79,7 @@
                   
                     <td></td>
                     <td class="text-right">
-                      {{ $pilots->links() }}
+                      {{ $operators->links() }}
                     </td>
                   </tr>
                </tfoot>

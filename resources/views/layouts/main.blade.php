@@ -201,8 +201,35 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{route('drone.index')}}" class="nav-link active">
+                @if(Auth::user()->role == 3)
+                  <li class="nav-item">
+                    <a href="{{route('admin.drone')}}" class="nav-link active">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Drones</p>
+                    </a>
+                  </li>
+
+                <li class="nav-item">
+                <a href="{{route('admin.flightPlan')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Drone flight plan</p>
+                </a>
+              </li> 
+               <li class="nav-item">
+                <a href="{{route('admin.pilot')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Pilot</p>
+                </a>
+              </li> 
+               <li class="nav-item">
+                <a href="{{route('admin.operator')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Operator</p>
+                </a>
+              </li> 
+                @else
+                <li>
+               <a href="{{route('drone.index')}}" class="nav-link active">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Drones</p>
                 </a>
@@ -221,7 +248,7 @@
                 </a>
               </li> 
               @endif
-             
+            @endif             
             </ul>
           </li>
           <!-- <li class="nav-item">
