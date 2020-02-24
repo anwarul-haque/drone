@@ -64,4 +64,9 @@ class User extends Authenticatable
         return $this->hasMany('App\FlightPlan');
     }
 
+    
+    public function AauthAcessToken(){
+        return $this->hasMany('\App\OauthAccessToken');
+    }
+
 }
