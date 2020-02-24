@@ -22,9 +22,9 @@ Route::group(['middleware' => ['auth:api']], function () {
         return $request->user();
     });
    
-    Route::apiResource('drone','api\DroneController');
+    Route::apiResource('drone','Api\DroneController');
+    Route::apiResource('flightPlan','Api\FlightPlanController');
 
-    
     Route::post('logout','Api\AuthController@logout');
 });
 Route::post('/register', 'Api\AuthController@register');
