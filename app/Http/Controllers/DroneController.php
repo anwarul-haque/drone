@@ -42,7 +42,7 @@ class DroneController extends Controller
     public function store(Request $request)
     {
         //
-       
+    //    dd($request->all());
         $request->validate([
             'name' => 'required',
             'model_no' => 'required',
@@ -54,6 +54,10 @@ class DroneController extends Controller
         $request->merge(['user_id' => Auth::user()->id]);
 
         $drone = Drone::create($request->all());
+        if ($request->hasFile('dImage')) {
+            $url = str_replace('public/', '',$request->dImage->store('public/image'));
+            $drone->image()->create(['url'=>$url,'type'=>'image']);
+        }
 
         return redirect()->route('drone.index');
     }

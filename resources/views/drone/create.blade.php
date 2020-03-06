@@ -34,7 +34,7 @@
               <!-- /.card-header -->
               <!-- form start -->
               <!-- <form role="form" id="register_drone" novalidate="novalidate"> -->
-              <form method="post" action="{{ route('drone.store') }}" accept-charset="UTF-8">
+              <form method="post" action="{{ route('drone.store') }}" enctype="multipart/form-data" accept-charset="UTF-8">
                 <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
                     @include('drone._form')
               </form>

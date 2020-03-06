@@ -45,7 +45,7 @@
                   <tr>
                     <th scope="col">Name</th>
                     <th scope="col">Model Number</th>
-                    <th scope="col">Drone Image</th>
+                    <th scope="col">NPNT Complient	</th>
                     <th scope="col">Size</th>
                     <th scope="col">Type</th>
                    
@@ -53,14 +53,19 @@
                   </tr>
                 </thead>
                 <tbody>
-                  {{-- {{dd($drones)}} --}}
+                  
                   @foreach ($drones as $drone)
                   <tr>
                     <td>{{$drone->name}}</td>
                     <td>{{$drone->model_no}}</td>
                     <td>
-                      
                      
+                      @if ($drone->is_npnt ===0)
+                          {{'NO'}}
+                      @else
+                          {{'YES'}}
+                      @endif
+                    
                     </td>
                     <td>
                       @if ($drone->size == 1)
