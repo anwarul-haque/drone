@@ -17,6 +17,16 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/home/{id}', 'HomeController@show')->name('home.show');
+
+Route::post('/home/{id}', 'HomeController@update')->name('home.update');
+
+Route::resource('drone', 'DroneController');
+Route::resource('flightPlan', 'FlightPlanController');
+
+Route::resource('pilot', 'PilotController');
 Route::group(['middleware' => ['auth']], function () { 
     Route::get('/home', 'HomeController@index')->name('home');
 
@@ -38,6 +48,13 @@ Route::group(['middleware' => ['auth']], function () {
 
 
 Route::get('/hello/{id}','HomeController@hello')->name('hello');
+Route::get('/admin/map','AdminController@map')->name('admin.map');
+
+Route::get('/admin/getmap','AdminController@getMap')->name('admin.getMap');
+
+Route::get('/admin/notice', function(){
+	return view('admin.notice');
+})->name('admin.notice');
 
 Route::get('/getName',function(){
     return config('app.name');

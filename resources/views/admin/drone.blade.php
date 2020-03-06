@@ -4,6 +4,7 @@
     color: brown;
   }
 </style>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
 @section('content')
 <div class="row">
   <div class="col-12">
@@ -37,6 +38,7 @@
               <!-- <h3 class="card-title">DataTable with minimal features &amp; hover style</h3> -->
               <!-- Button trigger modal -->
                <a href="{{route('drone.create')}}" class="btn btn-info pull-left">Add Drone</a>
+              <button onclick=" return getMapLocation()">get location</button>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -129,3 +131,28 @@
       <!-- /.row -->
     </section>
 @endsection
+
+<script type="text/javascript">
+  
+  // var data = 'hello';
+  // console.log(url);
+function getMapLocation() {
+  var url = '{{route("admin.getMap")}}';
+  $.ajax({
+    url: url,
+    type: 'get',
+    success: function(response)
+    {
+      var location = [];
+      $.each(response, function( index, value ) {
+        
+        location.push(Number(value.lat));
+        location.push(Number(value.lng));
+        
+      });
+        console.log(location);
+    }
+  });
+}
+
+</script>

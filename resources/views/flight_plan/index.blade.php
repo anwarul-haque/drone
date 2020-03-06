@@ -46,6 +46,9 @@
                     <th scope="col">Address</th>
                     <th scope="col">Zip code</th>
                     <th scope="col">Pilot Name</th>
+                    <th scope="col">Latitude</th>
+                    <th scope="col">Longitude</h>
+                    <th scope="col">Date</th>
                     <th scope="col">Start Time</th>
                     <th scope="col">End Time</th>
                     <th scope="col">Height</th>
@@ -67,6 +70,9 @@
                       @endphp
                       {{ $userPilot->name}}
                     </td>
+                    <td>{{$flightPlan->lat}}</td>
+                    <td>{{$flightPlan->lng}}</td>
+                    <td>{{$flightPlan->date}}</td>
                     <td>{{$flightPlan->start_time}}</td>
                     <td>
                       {{$flightPlan->end_time}}

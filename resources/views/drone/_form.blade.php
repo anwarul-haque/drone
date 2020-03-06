@@ -7,6 +7,10 @@
         <label for="model_no">Model Number</label>
         <input type="text" name="model_no" class="form-control" id="model_no" placeholder="Model number">
     </div>
+        <div class="form-group">
+        <label for="d_image">Drone Image</label>
+        <input type="file" name="dImage" class="form-control" id="d_image" placeholder="Drone Images">
+    </div>
     <div class="form-group">
         <label>Size</label>
         <select name="size" class="form-control select2" style="width: 100%;">

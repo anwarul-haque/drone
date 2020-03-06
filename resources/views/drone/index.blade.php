@@ -45,7 +45,7 @@
                   <tr>
                     <th scope="col">Name</th>
                     <th scope="col">Model Number</th>
-                    <th scope="col">NPNT Complient</th>
+                    <th scope="col">Drone Image</th>
                     <th scope="col">Size</th>
                     <th scope="col">Type</th>
                    
