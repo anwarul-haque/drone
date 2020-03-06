@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Jarvis Labs</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -74,7 +74,9 @@
                     @auth
                     
                         <a href="{{ url('/home') }}">Home</a>
+                        <a href="https://drive.google.com/file/d/18iB3HIpV1wN0NnVmd7ulxobjBV_1Tb8O/view?usp=sharing">Download APP</a>
                     @else
+                    <a href="https://drive.google.com/file/d/18iB3HIpV1wN0NnVmd7ulxobjBV_1Tb8O/view?usp=sharing">Download APP</a>
                         <a href="{{ route('login') }}">Login</a>
 
                         @if (Route::has('register'))

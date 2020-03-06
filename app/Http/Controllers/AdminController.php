@@ -53,6 +53,30 @@ class AdminController extends Controller
         $operators = User::where('role',1)->paginate(5);
         return view('admin.operator')->with('operators',$operators);
     }
+    public function map()
+    {
+          $flightPlans  = FlightPlan::paginate(5);
+        return view('admin.map')->with('flightPlans',$flightPlans);
+    }
+    public function getMap(){
+        $loc = [];
+          $flightPlans  = FlightPlan::select('lat','lng')->get()->toArray();
+          $a =[];
+          foreach ($flightPlans as $value) {
+          
+             array_push($a,$value);
+          }
+          // dd($a);
+          // dd($flightPlans);
+          
 
+        return $a;
+        // $markers = [
+        // [23.2313, 77.4326],
+        // [23.2344, 77.4354],
+        // [23.2356, 77.4006],
+        // [23.2303, 77.4327],];
+        // return $markers;
+    }
    
 }

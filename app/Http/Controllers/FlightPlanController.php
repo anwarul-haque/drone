@@ -50,7 +50,7 @@ class FlightPlanController extends Controller
      */
     public function store(Request $request)
     {
-        
+        // dd($request->all());
         $request->validate([
             'address' => 'required',
             'zip_code' => 'required',

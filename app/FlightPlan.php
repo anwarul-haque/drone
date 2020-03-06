@@ -21,6 +21,10 @@ class FlightPlan extends Model
         'user_id',
         'pilot_id',
         'drone_id',
+        'lat',
+        'lng',
+        'date',
+
        
     ];
     protected $table = 'flight_plans';

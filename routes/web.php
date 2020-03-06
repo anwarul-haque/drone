@@ -34,3 +34,10 @@ Route::get('/admin/pilot', 'AdminController@pilot')->name('admin.pilot');
 Route::get('/admin/operator', 'AdminController@operator')->name('admin.operator');
 
 Route::get('/hello/{id}','HomeController@hello')->name('hello');
+Route::get('/admin/map','AdminController@map')->name('admin.map');
+
+Route::get('/admin/getmap','AdminController@getMap')->name('admin.getMap');
+
+Route::get('/admin/notice', function(){
+	return view('admin.notice');
+})->name('admin.notice');
