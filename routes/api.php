@@ -13,8 +13,24 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
-Route::get('/admin/drone', 'AdminController@drone')->name('admin.drone');
+Route::group(['middleware' => ['auth:api']], function () { 
+    Route::get('user', function (Request $request) {
+        return $request->user();
+    });
+    Route::apiResource('home','Api\HomeController');
+    Route::apiResource('drone','Api\DroneController');
+    Route::apiResource('flightPlan','Api\FlightPlanController');
+    Route::apiResource('pilot','Api\PilotController');
+    Route::post('logout','Api\AuthController@logout');
+
+    Route::get('/admin/drone', 'Api\AdminController@drone');
+    Route::get('/admin/flightPlan', 'Api\AdminController@flightPlan');
+    Route::get('/admin/pilot', 'Api\AdminController@pilot');
+    Route::get('/admin/operator', 'Api\AdminController@operator');
+});
+Route::post('/register', 'Api\AuthController@register');
+Route::post('/login', 'Api\AuthController@login');

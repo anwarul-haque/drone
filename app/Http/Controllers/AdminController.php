@@ -20,8 +20,7 @@ class AdminController extends Controller
     public function drone()
     {
         // dd('mjghjg');
-        // dd(Auth::user()->id);
-        $drones  = Drone::paginate(5);
+        $drones  = Drone::with('user')->paginate(5);
 
         return view('admin.drone')->with('drones',$drones);
     }
