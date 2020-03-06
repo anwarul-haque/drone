@@ -21,6 +21,7 @@ class CreateDronesTable extends Migration
             $table->string('type');
             $table->integer('is_npnt')->default(0);
             $table->integer('user_id')->unsigned();
+            $table->integer('status')->default(0)->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
             $table->softDeletes();

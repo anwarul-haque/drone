@@ -57,9 +57,9 @@ class PilotController extends Controller
      * @param  \App\Pilot  $drone
      * @return \Illuminate\Http\Response
      */
-    public function show(Pilot $drone)
+    public function show(Pilot $pilot)
     {
-        return response()->json(['Pilot'=>$Pilot], $this->successStatus);
+        return response()->json(['pilot'=>$pilot], $this->successStatus);
     }
 
 
