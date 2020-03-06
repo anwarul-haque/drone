@@ -4,7 +4,9 @@
     color: brown;
   }
 </style>
+
 @section('content')
+
 <div class="row">
   <div class="col-12">
     <div class="card">
@@ -12,12 +14,12 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0 text-dark">My Pilots</h1>
+              <h1 class="m-0 text-dark">Drone</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Pilots</li>
+                <li class="breadcrumb-item active">Drone</li>
               </ol>
             </div><!-- /.col -->
           </div><!-- /.row -->
@@ -26,6 +28,7 @@
     </div>
   </div>
 </div>
+
     <!-- /.content-header -->
 
     <!-- Main content -->
@@ -36,7 +39,7 @@
             <div class="card-header"> 
               <!-- <h3 class="card-title">DataTable with minimal features &amp; hover style</h3> -->
               <!-- Button trigger modal -->
-               <a href="{{route('pilot.create')}}" class="btn btn-info pull-left">Add Pilot</a>
+               <!-- <a href="{{route('drone.create')}}" class="btn btn-info pull-left">Add Drone</a> -->
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -44,23 +47,55 @@
                 <thead>
                   <tr>
                     <th scope="col">Name</th>
-                    <th scope="col">Address</th>
+                    <th scope="col">Model Number</th>
+                    <th scope="col">NPNT Complient</th>
+                    <th scope="col">Size</th>
+                    <th scope="col">Type</th>
+                   
                     <th class="text-right" scope="col">Option</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {{-- {{dd($drones)}} --}}
-                  @foreach ($pilots as $pilot)
+               
+                  @foreach ($drones as $drone)
+
                   <tr>
-                    <td>{{$pilot->name}}</td>
-                    <td>{{$pilot->address}}</td>
+                    <td>{{$drone->name}}</td>
+                    <td>{{$drone->model_no}}</td>
+                    <td>
+                      
+                      
+                    </td>
+                    <td>
+                      @if ($drone->size == 1)
+                        Nano V
+                      @endif
+                      @if($drone->size == 2)
+                          Micro
+                      @endif
+                      @if($drone->size == 3)
+                        Small
+                      @endif
+                        
+                    </td>
+                    <td>
+                      @if ($drone->type == 1)
+                        Multiroter V
+                      @endif
+                      @if($drone->type == 2)
+                        Flying Wing
+                      @endif
+                      @if($drone->type == 3)
+                        VTOL-Hybrid
+                      @endif
+                    </td>
                    
                     <td class="text-right">
                       <div class="btn-group">
-                        {{-- <a href="{{ route('pilot.edit',$pilot->id) }}" class="btn"><i class="fas fa-edit btn-option-con"></i></a> --}}
+                        <a href="{{ route('drone.edit',$drone->id) }}" class="btn"><i class="fas fa-edit btn-option-con"></i></a>
                   
                         
-                        <form action="{{ route('pilot.update',$pilot->id) }}" method="POST">
+                        <form action="{{ route('drone.update',$drone->id) }}" method="POST">
                           {{ csrf_field() }}
                           {{ method_field('DELETE') }}
                           
@@ -76,10 +111,13 @@
                 </tbody>
                 <tfoot>
                   <tr>
-                  
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                     <td></td>
                     <td class="text-right">
-                      {{ $pilots->links() }}
+                      {{ $drones->links() }}
                     </td>
                   </tr>
                </tfoot>

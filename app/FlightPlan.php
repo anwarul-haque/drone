@@ -24,4 +24,12 @@ class FlightPlan extends Model
        
     ];
     protected $table = 'flight_plans';
+
+    /**
+     * Get the post that owns the comment.
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

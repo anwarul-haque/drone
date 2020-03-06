@@ -1,36 +1,27 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Drone;
 use Auth;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class DroneController extends Controller
 {
-    /**
+    //
+    public $successStatus = 200;
+     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        
-        $drones  = Drone::where('user_id',Auth::user()->id)->paginate(5);
-
-        return view('drone.index')->with('drones',$drones);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('drone.create');
+        $drones  = Drone::where('user_id',$request->user()->id)->get();
+        return response()->json(['drones'=>$drones], $this->successStatus);
     }
 
     /**
@@ -42,20 +33,18 @@ class DroneController extends Controller
     public function store(Request $request)
     {
         //
-       
+        $request->merge(['user_id' =>$request->user()->id]);
         $request->validate([
             'name' => 'required',
             'model_no' => 'required',
             'size' => 'required',
             'type' => 'required',
             'is_npnt' => 'required',
+            'user_id' => 'required',
         ]);
 
-        $request->merge(['user_id' => Auth::user()->id]);
-
         $drone = Drone::create($request->all());
-
-        return redirect()->route('drone.index');
+        return response()->json(['drone'=>$drone], $this->successStatus);
     }
 
     /**
@@ -66,21 +55,7 @@ class DroneController extends Controller
      */
     public function show(Drone $drone)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Drone  $drone
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-        // dd($id);
-        $drone = Drone::find($id);
-        return view('drone.edit')->with('drone',$drone);
+        return response()->json(['drone'=>$drone], $this->successStatus);
     }
 
     /**
@@ -90,13 +65,11 @@ class DroneController extends Controller
      * @param  \App\Drone  $drone
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Drone $drone)
     {
-        $drone = Drone::find($id);
-      
+        
         $drone->fill($request->all())->save();
-
-        return redirect()->route('drone.index');
+        return response()->json(['drone'=>$drone], $this->successStatus);
     }
 
     /**
@@ -105,10 +78,9 @@ class DroneController extends Controller
      * @param  \App\Drone  $drone
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Drone $drone)
     {
-         Drone::destroy($id);
-
-        return redirect()->route('drone.index');
+         $drone = $drone->delete();
+         return response()->json(['drone'=>$drone], $this->successStatus);
     }
 }

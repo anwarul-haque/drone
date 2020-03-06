@@ -1,15 +1,17 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
-
+use App\Http\Controllers\Controller;
 use App\User;
 use Auth;
-
 class HomeController extends Controller
 {
-    /**
+    //
+
+    public $successStatus = 200;
+     /**
      * Create a new controller instance.
      *
      * @return void
@@ -27,13 +29,13 @@ class HomeController extends Controller
     public function index()
     {
         $user = Auth::user();
-        return view('home')->with('user',$user);
+        return response()->json(['user'=>$user], $this->successStatus);
     }
  
     public function show($id)
     {
         $user = User::with('image')->find($id);
-        return view('user.index')->with('user',$user);
+        return response()->json(['user'=>$user], $this->successStatus);
     }
 
      /**
@@ -45,7 +47,7 @@ class HomeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // dd($request);
+       
         $user = User::with('image')->find($id);
         $user->name = $request->name;
         $user->email = $request->email;
@@ -61,12 +63,6 @@ class HomeController extends Controller
             $user->image()->create(['url'=>$url,'type'=>'image']);
         }
         $user->save();
-        return back();
+        return response()->json(['user'=>$user], $this->successStatus);
     }
-
-    public function hello($id){
-        $user = User::with('image')->find($id);
-        return view('user.index')->with('user',$user);
-    }
-
 }

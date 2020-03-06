@@ -34,8 +34,7 @@ class FlightPlanController extends Controller
     {
         //
         
-        $pilots_id = Pilot::where('operator_id',Auth::user()->id)->get()->pluck('id')->toArray();
-        
+        $pilots_id = Pilot::where('operator_id',Auth::user()->id)->get()->pluck('pilot_id')->toArray();
         $pilots = User::where('role',2)->whereIn('id',$pilots_id)->get();
         $drones = Drone::where('user_id',Auth::user()->id)->get();
        
